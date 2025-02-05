@@ -10,9 +10,10 @@ import AVFoundation
 
 struct WritingHomeView: View {
     @State var totalChannel: Int = 0
-    @State var player: AVAudioPlayer?
-    @State var duration: TimeInterval
+    @State var player: AVAudioPlayer? = nil
+    @State var duration: TimeInterval = 0
     @State var isPlusClicked: Bool = false
+    @Binding var path: [String]
     
     var body: some View {
         ZStack {
@@ -20,7 +21,7 @@ struct WritingHomeView: View {
                 HStack {
                     Spacer()
                     Button {
-                        // 홈으로 돌아가는 기능
+                        path.removeAll()
                     } label: {
                         ZStack {
                             Circle()
@@ -83,9 +84,10 @@ struct WritingHomeView: View {
                     
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    WritingHomeView(duration: 1)
+    WritingHomeView(path: .constant([""]))
 }
