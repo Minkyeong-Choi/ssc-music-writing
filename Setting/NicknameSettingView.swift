@@ -13,24 +13,40 @@ struct NicknameSettingView: View {
     @State var goNext: Bool = false
     
     var body: some View {
-        HStack {
-            TextField("name", text: $name)
-                .modifier(LoginTextFieldModifier(width: 300, height: 70))
-            Spacer()
-            Button {
-                goNext = true
-            } label: {
-                Circle()
-                    .foregroundStyle(.gray)
-                    .frame(width: 70, height: 70)
+        ZStack {
+//            BackgroundImageView
+            HStack {
+                TextField("name", text: $name)
+                    .modifier(LoginTextFieldModifier(width: 300, height: 70))
+                Spacer()
+                Button {
+                    goNext = true
+                } label: {
+                    Circle()
+                        .foregroundStyle(.gray)
+                        .frame(width: 70, height: 70)
+                }
             }
-        }
-        if goNext {
-            // 다음 페이지로 넘어가기
+            if goNext {
+                // 다음 페이지로 넘어가기
+            }
         }
     }
 }
 
+//struct BackgroundImageView: View {
+//    var image: UIImage
+//    
+//    var body: some View {
+//        GeometryReader { geometry in
+//            Image(uiImage: image)
+//                .resizable()
+//                .scaledToFill() // 기기의 화면 비율에 맞게 이미지 확대
+//                .frame(width: geometry.size.width, height: geometry.size.height)
+//                .ignoresSafeArea() // 상태바 영역까지 꽉 차게 설정
+//        }
+//    }
+//}
 
 struct LoginTextFieldModifier: ViewModifier {
     
@@ -41,7 +57,6 @@ struct LoginTextFieldModifier: ViewModifier {
         content
             .font(.system(size: 16))
             .padding()
-            .textInputAutocapitalization(.never) // 처음 문자 자동으로 대문자로 바꿔주는 기능 막기
             .frame(width: width, height: height)
             .background {
                 RoundedRectangle(cornerRadius: 7)
